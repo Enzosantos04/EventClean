@@ -1,4 +1,9 @@
 package enzosdev.eventclean.core.usecases;
 
-public class CreateEventUsecasee {
+import enzosdev.eventclean.core.entities.Event;
+
+public interface CreateEventCase {
+
+    //boa pratica usar nomeclatura mais simples para deixar implicito a chamada do usecase interface
+    public Event execute(Event event);
 }
