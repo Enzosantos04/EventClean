@@ -1,4 +1,11 @@
 package enzosdev.eventclean.core.usecases;
 
-public class CreateEventCaseImpl {
+import enzosdev.eventclean.core.entities.Event;
+
+public class CreateEventCaseImpl implements CreateEventCase{
+
+    @Override
+    public Event execute(Event event) {
+        return null;
+    }
 }
