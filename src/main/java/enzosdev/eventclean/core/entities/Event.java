@@ -7,7 +7,7 @@ import java.util.Date;
 public record Event(Long id, String name,
                     String description, String ticketIdentifier,
                     Date beginAt, Date endAt,
-                    Long capacity, String location, String eventOrganizer,
+                    Integer capacity, String location, String eventOrganizer,
                     EventType type) {
 
 }
