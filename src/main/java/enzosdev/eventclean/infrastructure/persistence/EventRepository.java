@@ -1,4 +1,6 @@
 package enzosdev.eventclean.infrastructure.persistence;
 
-public interface EventRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EventRepository extends JpaRepository<EventEntity, Long> {
 }
