@@ -5,20 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
+import java.util.Date;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class EventDTO {
-    private Long id;
-    private String name;
-    private String description;
-    private String ticketIdentifier;
-    private LocalDateTime beginAt;
-    private LocalDateTime endAt;
-    private Integer capacity;
-    private String location;
-    private String eventOrganizer;
-    private EventType type;
 
-}
+public record EventDTO(
+        Long id, String name,
+        String description, String ticketIdentifier,
+        Date beginAt, Date endAt,
+        Integer capacity, String location, String eventOrganizer,
+        EventType type
+){}
