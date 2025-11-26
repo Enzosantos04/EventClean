@@ -15,6 +15,6 @@ private final EventGateway eventGateway;
 
     @Override
     public Event execute(Event event) {
-        return null;
+        return eventGateway.createEvent(event);
     }
 }
