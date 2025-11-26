@@ -9,5 +9,5 @@ end_at TIMESTAMP NOT NULL,
 capacity INTEGER,
 location VARCHAR(255) NOT NULL,
 event_organizer VARCHAR(255),
-event_type VARCHAR(100)
+type VARCHAR(100)
 );
