@@ -8,6 +8,7 @@ import enzosdev.eventclean.infrastructure.mapper.EventMapper;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1")
@@ -15,7 +16,7 @@ public class EventController {
 
     private final CreateEventUsecase createEventUsecase;
     private final EventMapper eventMapper;
-    private final FindEventUsecase findEventUsecase;;
+    private final FindEventUsecase findEventUsecase;
 
     public EventController(CreateEventUsecase createEventUsecase, EventMapper eventMapper, FindEventUsecase findEventUsecase) {
         this.createEventUsecase = createEventUsecase;
@@ -35,8 +36,9 @@ public class EventController {
 
 
     @GetMapping("list")
-    public List<EventDTO> eventList(EventDTO eventDTO){
-        List<Event> eventDTOList =  findEventUsecase.execute(eventMapper.toEntity(eventDTO));
-        return eventMapper.toDtoList(eventDTOList);
+    public List<EventDTO> eventList(){
+        return findEventUsecase.execute().stream()
+                .map(eventMapper::toDto)
+                .collect(Collectors.toList());
     }
 }
