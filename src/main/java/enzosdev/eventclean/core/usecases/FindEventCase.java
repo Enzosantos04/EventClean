@@ -2,7 +2,9 @@ package enzosdev.eventclean.core.usecases;
 
 import enzosdev.eventclean.core.entities.Event;
 
+import java.util.List;
+
 public interface FindEventCase {
 
-    public Event execute(Event event);
+    public List<Event> execute(Event event);
 }
