@@ -24,11 +24,6 @@ public class EventMapper {
                 event.type()
         );
     }
-    public List<EventDTO> toDtoList(List<Event> events) {
-        return events.stream()
-                .map(this::toDto)
-                .toList();
-    }
 
   public Event toEntity(EventDTO eventDTO){
         return new Event(
