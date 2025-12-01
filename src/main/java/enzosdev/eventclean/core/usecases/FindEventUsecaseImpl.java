@@ -5,12 +5,12 @@ import enzosdev.eventclean.core.gateway.EventGateway;
 
 import java.util.List;
 
-public class FindEventCaseImpl implements FindEventCase {
+public class FindEventUsecaseImpl implements FindEventUsecase {
 
 
     private final EventGateway eventGateway;
 
-    public FindEventCaseImpl(EventGateway eventGateway) {
+    public FindEventUsecaseImpl(EventGateway eventGateway) {
         this.eventGateway = eventGateway;
     }
 

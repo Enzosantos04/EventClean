@@ -1,8 +1,8 @@
 package enzosdev.eventclean.infrastructure.presentation;
 
 import enzosdev.eventclean.core.entities.Event;
-import enzosdev.eventclean.core.usecases.CreateEventCase;
-import enzosdev.eventclean.core.usecases.FindEventCase;
+import enzosdev.eventclean.core.usecases.CreateEventUsecase;
+import enzosdev.eventclean.core.usecases.FindEventUsecase;
 import enzosdev.eventclean.infrastructure.dtos.EventDTO;
 import enzosdev.eventclean.infrastructure.mapper.EventMapper;
 import org.springframework.web.bind.annotation.*;
@@ -13,21 +13,21 @@ import java.util.List;
 @RequestMapping("api/v1")
 public class EventController {
 
-    private final CreateEventCase createEventCase;
+    private final CreateEventUsecase createEventUsecase;
     private final EventMapper eventMapper;
-    private final FindEventCase findEventCase;;
+    private final FindEventUsecase findEventUsecase;;
 
-    public EventController(CreateEventCase createEventCase, EventMapper eventMapper, FindEventCase findEventCase) {
-        this.createEventCase = createEventCase;
+    public EventController(CreateEventUsecase createEventUsecase, EventMapper eventMapper, FindEventUsecase findEventUsecase) {
+        this.createEventUsecase = createEventUsecase;
         this.eventMapper = eventMapper;
-        this.findEventCase = findEventCase;
+        this.findEventUsecase = findEventUsecase;
     }
 
     @PostMapping("createEvent")
     public EventDTO createEvent(@RequestBody EventDTO eventDTO){
         // no corpo da requsicao vai receber o dto que vai ser convertido para
         //entidade usando o mapper
-        Event newEvent = createEventCase.execute(eventMapper.toEntity(eventDTO));
+        Event newEvent = createEventUsecase.execute(eventMapper.toEntity(eventDTO));
         // tem q devolver como EventDTO
         return eventMapper.toDto(newEvent);
 
@@ -36,7 +36,7 @@ public class EventController {
 
     @GetMapping("list")
     public List<EventDTO> eventList(EventDTO eventDTO){
-        List<Event> eventDTOList =  findEventCase.execute(eventMapper.toEntity(eventDTO));
+        List<Event> eventDTOList =  findEventUsecase.execute(eventMapper.toEntity(eventDTO));
         return eventMapper.toDtoList(eventDTOList);
     }
 }

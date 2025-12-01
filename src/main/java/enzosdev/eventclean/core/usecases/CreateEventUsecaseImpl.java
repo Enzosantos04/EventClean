@@ -5,11 +5,11 @@ import enzosdev.eventclean.core.gateway.EventGateway;
 
 
 
-public class CreateEventCaseImpl implements CreateEventCase{
+public class CreateEventUsecaseImpl implements CreateEventUsecase {
 
 
 private final EventGateway eventGateway;
-    public CreateEventCaseImpl(EventGateway eventGateway) {
+    public CreateEventUsecaseImpl(EventGateway eventGateway) {
         this.eventGateway = eventGateway;
     }
 
