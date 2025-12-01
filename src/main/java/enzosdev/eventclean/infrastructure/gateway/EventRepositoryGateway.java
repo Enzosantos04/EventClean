@@ -7,6 +7,10 @@ import enzosdev.eventclean.infrastructure.persistence.EventEntity;
 import enzosdev.eventclean.infrastructure.persistence.EventRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 @Component
 public class EventRepositoryGateway implements EventGateway {
 
@@ -26,5 +30,11 @@ public class EventRepositoryGateway implements EventGateway {
         EventEntity newEvent = eventRepository.save(entity);
         //converte de volta  para Event
         return eventEntityMapper.toDomain(newEvent);
+    }
+
+    @Override
+    public List<Event> findEvents(Event event) {
+        List<EventEntity> events = eventRepository.findAll();
+        return events.stream().map(eventEntityMapper::toDomain).collect(Collectors.toList());
     }
 }
