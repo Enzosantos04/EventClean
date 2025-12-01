@@ -5,6 +5,8 @@ import enzosdev.eventclean.core.entities.Event;
 import enzosdev.eventclean.infrastructure.dtos.EventDTO;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class EventMapper {
 
@@ -22,7 +24,11 @@ public class EventMapper {
                 event.type()
         );
     }
-
+    public List<EventDTO> toDtoList(List<Event> events) {
+        return events.stream()
+                .map(this::toDto)
+                .toList();
+    }
 
   public Event toEntity(EventDTO eventDTO){
         return new Event(
