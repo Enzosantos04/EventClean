@@ -15,7 +15,7 @@ public class FindEventUsecaseImpl implements FindEventUsecase {
     }
 
     @Override
-    public List<Event> execute(Event event) {
-        return eventGateway.findEvents(event);
+    public List<Event> execute() {
+        return eventGateway.findEvents();
     }
 }
