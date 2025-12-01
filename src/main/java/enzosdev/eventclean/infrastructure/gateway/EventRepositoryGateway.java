@@ -3,6 +3,7 @@ package enzosdev.eventclean.infrastructure.gateway;
 import enzosdev.eventclean.core.entities.Event;
 import enzosdev.eventclean.core.gateway.EventGateway;
 import enzosdev.eventclean.infrastructure.mapper.EventEntityMapper;
+import enzosdev.eventclean.infrastructure.mapper.EventMapper;
 import enzosdev.eventclean.infrastructure.persistence.EventEntity;
 import enzosdev.eventclean.infrastructure.persistence.EventRepository;
 import org.springframework.stereotype.Component;
@@ -33,8 +34,9 @@ public class EventRepositoryGateway implements EventGateway {
     }
 
     @Override
-    public List<Event> findEvents(Event event) {
-        List<EventEntity> events = eventRepository.findAll();
-        return events.stream().map(eventEntityMapper::toDomain).collect(Collectors.toList());
+    public List<Event> findEvents() {
+       return eventRepository.findAll().stream()
+                .map(eventEntityMapper::toDomain).collect(Collectors.toList());
+
     }
 }
