@@ -5,9 +5,12 @@ import enzosdev.eventclean.core.usecases.CreateEventUsecase;
 import enzosdev.eventclean.core.usecases.FindEventUsecase;
 import enzosdev.eventclean.infrastructure.dtos.EventDTO;
 import enzosdev.eventclean.infrastructure.mapper.EventMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -25,12 +28,14 @@ public class EventController {
     }
 
     @PostMapping("createEvent")
-    public EventDTO createEvent(@RequestBody EventDTO eventDTO){
+    public ResponseEntity<Map<String, Object>> createEvent(@RequestBody EventDTO eventDTO){
         // no corpo da requsicao vai receber o dto que vai ser convertido para
         //entidade usando o mapper
         Event newEvent = createEventUsecase.execute(eventMapper.toEntity(eventDTO));
-        // tem q devolver como EventDTO
-        return eventMapper.toDto(newEvent);
+        Map<String, Object> response = new HashMap<>();
+        response.put("Message:", "Event registered with success!");
+        response.put("Event data:", eventMapper.toDto(newEvent));
+        return ResponseEntity.ok(response);
 
     }
 
