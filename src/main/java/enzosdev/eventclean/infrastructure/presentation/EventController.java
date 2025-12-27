@@ -2,6 +2,7 @@ package enzosdev.eventclean.infrastructure.presentation;
 
 import enzosdev.eventclean.core.entities.Event;
 import enzosdev.eventclean.core.usecases.CreateEventUsecase;
+import enzosdev.eventclean.core.usecases.FilterEventIdentifierUsecase;
 import enzosdev.eventclean.core.usecases.FindEventUsecase;
 import enzosdev.eventclean.infrastructure.dtos.EventDTO;
 import enzosdev.eventclean.infrastructure.mapper.EventMapper;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -20,11 +22,13 @@ public class EventController {
     private final CreateEventUsecase createEventUsecase;
     private final EventMapper eventMapper;
     private final FindEventUsecase findEventUsecase;
+    private final FilterEventIdentifierUsecase filterEventIdentifierUsecase;
 
-    public EventController(CreateEventUsecase createEventUsecase, EventMapper eventMapper, FindEventUsecase findEventUsecase) {
+    public EventController(CreateEventUsecase createEventUsecase, EventMapper eventMapper, FindEventUsecase findEventUsecase, FilterEventIdentifierUsecase filterEventIdentifierUsecase) {
         this.createEventUsecase = createEventUsecase;
         this.eventMapper = eventMapper;
         this.findEventUsecase = findEventUsecase;
+        this.filterEventIdentifierUsecase = filterEventIdentifierUsecase;
     }
 
     @PostMapping("createEvent")
@@ -46,4 +50,12 @@ public class EventController {
                 .map(eventMapper::toDto)
                 .collect(Collectors.toList());
     }
+
+@GetMapping("/TicketIdentifier/{identifier}")
+    public ResponseEntity<Event> findByTicketIdentifier(@PathVariable String identifier){
+        Event event = filterEventIdentifierUsecase.execute(identifier);
+        return ResponseEntity.ok(event);
+}
+
+
 }
