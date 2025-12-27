@@ -20,4 +20,13 @@ public class ControllerExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
 
+
+    @ExceptionHandler(NotFoundEventException.class)
+    public ResponseEntity<Map<String, String>> handleNotFoundEventException(NotFoundEventException ex){
+        Map<String, String> response = new HashMap<>();
+        response.put("Error: ", ex.getMessage());
+        response.put("Message: ", "Event Not Found.");
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
 }
