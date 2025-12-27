@@ -39,4 +39,10 @@ public class EventRepositoryGateway implements EventGateway {
                 .map(eventEntityMapper::toDomain).collect(Collectors.toList());
 
     }
+
+    @Override
+    public boolean existsByIdentifier(String identifier) {
+        return eventRepository.findAll().stream()
+                .anyMatch(event -> event.getTicketIdentifier().equalsIgnoreCase(identifier));
+    }
 }
