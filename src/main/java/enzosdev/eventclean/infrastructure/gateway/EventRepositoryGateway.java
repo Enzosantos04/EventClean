@@ -9,6 +9,7 @@ import enzosdev.eventclean.infrastructure.persistence.EventRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -44,5 +45,10 @@ public class EventRepositoryGateway implements EventGateway {
     public boolean existsByIdentifier(String identifier) {
         return eventRepository.findAll().stream()
                 .anyMatch(event -> event.getTicketIdentifier().equalsIgnoreCase(identifier));
+    }
+
+    @Override
+    public Optional<Event> filterEventByIdentifier(String identifier) {
+        return eventRepository.findByticketIdentifier(identifier);
     }
 }
