@@ -1,16 +1,23 @@
 package enzosdev.eventclean.infrastructure.exceptions;
 
+
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestControllerAdvice
-public class ControllerAdvice {
+public class ControllerExceptionHandler {
 
     @ExceptionHandler(DuplicateIdentifierException.class)
-    @ResponseStatus(HttpStatus.CONFLICT)
-    public String handleDuplicateIdentifier(DuplicateIdentifierException ex){
-        return ex.getMessage();
+    public ResponseEntity<Map<String, String>> handleDuplicateIdentifierExceptions(DuplicateIdentifierException ex){
+        Map<String, String> response = new HashMap<>();
+        response.put("Error: ", ex.getMessage());
+        response.put("Message: ", "Please insert a valid tickt identifier for your event and  try again");
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
+
 }
