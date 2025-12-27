@@ -1,6 +1,8 @@
 package enzosdev.eventclean.core.usecases;
 
-public interface FilterEventUsecase {
+import enzosdev.eventclean.core.entities.Event;
 
+public interface FilterEventIdentifierUsecase {
 
+public Event execute(String identifier);
 }
