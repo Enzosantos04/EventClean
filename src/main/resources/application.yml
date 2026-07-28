@@ -2,11 +2,20 @@ spring:
   application:
     name: EventClean
 
+#  datasource:
+#    url: ${DATABASE_URL}
+#    driver-class-name: org.postgresql.Driver
+#    username: ${DATABASE_USERNAME}
+#    password: ${DATABASE_PASSWORD}
   datasource:
-    url: ${DATABASE_URL}
-    driver-class-name: org.postgresql.Driver
-    username: ${DATABASE_USERNAME}
-    password: ${DATABASE_PASSWORD}
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdeb
+    username: admin
+    password: admin
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
 
   jpa:
 #    hibernate:
