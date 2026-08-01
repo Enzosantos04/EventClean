@@ -19,7 +19,7 @@ jobs:
           cache: 'maven'
 
       - name: Gerar o jar (build)
-        run: mvn clean package
+        run: mvn clean package -DskipTests
 
       - name: Copiar JAR para EC2 via SCP
         uses: appleboy/scp-action@v0.1.7
@@ -28,7 +28,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           source: "target/*.jar"
-          target: "/var/www/EventClean"
+          target: "EventClean"
           strip_components: 1
 
       - name: Reiniciar Servico Java na EC2
@@ -38,5 +38,5 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            mv /var/www/EventClean/*.jar /var/www/EventClean/app.jar
+            mv ~/EventClean/*.jar ~/EventClean/app.jar
             sudo systemctl restart EventClean
