@@ -15,8 +15,13 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+
       - name: Build Project
         run: mvn clean install
+
+      - name: Run all tests
+        run: mvn test
+
 
 
 
