@@ -6,6 +6,7 @@ import enzosdev.eventclean.infrastructure.mapper.EventEntityMapper;
 import enzosdev.eventclean.infrastructure.mapper.EventMapper;
 import enzosdev.eventclean.infrastructure.persistence.EventEntity;
 import enzosdev.eventclean.infrastructure.persistence.EventRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -50,5 +51,11 @@ public class EventRepositoryGateway implements EventGateway {
     @Override
     public Optional<Event> filterEventByIdentifier(String identifier) {
         return eventRepository.findByticketIdentifier(identifier);
+    }
+
+    @Override
+    @Transactional
+    public void deleteEventByIdentifier(String identifier) {
+         eventRepository.deleteByticketIdentifier(identifier);
     }
 }
