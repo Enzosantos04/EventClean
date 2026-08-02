@@ -14,4 +14,6 @@ public interface EventGateway {
     boolean existsByIdentifier(String identifier);
 
     Optional<Event> filterEventByIdentifier(String identifier);
+
+    void deleteEventByIdentifier(String identifier);
 }
