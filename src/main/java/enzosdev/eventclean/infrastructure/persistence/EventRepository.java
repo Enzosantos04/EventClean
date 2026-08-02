@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface EventRepository extends JpaRepository<EventEntity, Long> {
 
     Optional<Event> findByticketIdentifier(String identifier);
+    void deleteByticketIdentifier(String identifier);
 }
