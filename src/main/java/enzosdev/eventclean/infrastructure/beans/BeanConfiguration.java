@@ -25,4 +25,9 @@ public class BeanConfiguration {
     public FilterEventIdentifierUsecase filterEventIdentifierUsecase(EventGateway eventGateway){
         return new FilterEventIdentifierUsecaseImpl(eventGateway);
     }
+
+    @Bean
+    public DeleteEventUsecase deleteEventUsecase(EventGateway eventGateway){
+        return new DeleteEventUsecaseImpl(eventGateway);
+    }
 }
